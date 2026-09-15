@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>RU UERJ - Cartão Digital</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="user-greeting">
+        <h1>Olá, Jonas 👋</h1>
+        <p>Seu RU na palma da mão.</p>
+      </div>
+      <div class="balance-card">
+        <div class="balance-info">
+          <span class="balance-label">SALDO ATUAL</span>
+          <span class="balance-value" id="user-balance">R$ 2,00</span>
+        </div>
+        <button class="btn-recharge" onclick="rechargeBalance()">+ Recarregar</button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Digital Card -->
+      <section class="card-section">
+        <div class="digital-card">
+          <div class="card-top">
+            <span class="card-title">CARTÃO RU DIGITAL</span>
+            <i class="fa-solid fa-wallet card-icon"></i>
+          </div>
+          <div class="card-user-info">
+            <h2 id="card-name">Jonas</h2>
+            <p id="card-matricula">Matrícula: 20241234567</p>
+            <span class="card-balance" id="card-balance-display">R$ 2,00</span>
+          </div>
+          <div class="card-actions">
+            <button class="btn-card-action" onclick="showNFC()"><i class="fa-solid fa-wifi"></i> NFC</button>
+            <button class="btn-card-action" onclick="showQRCode()"><i class="fa-solid fa-qrcode"></i> QR Code</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Queue Status -->
+      <section class="queue-section">
+        <div class="queue-card">
+          <div class="queue-header">
+            <div class="queue-icon-wrapper">
+              <i class="fa-solid fa-users-line"></i>
+            </div>
+            <div class="queue-text">
+              <span class="queue-label">FILA AGORA</span>
+              <div class="queue-count">
+                <span class="queue-number" id="queue-count">68</span>
+                <span class="queue-unit">pessoas</span>
+              </div>
+              <span class="queue-time"><i class="fa-regular fa-clock"></i> Tempo médio: <strong id="queue-time">15 min</strong></span>
+            </div>
+            <button class="btn-view-queue" onclick="alert('Câmera da fila indisponível no momento.')">Ver Fila</button>
+          </div>
+          <div class="queue-bar-container">
+            <div class="queue-bar" style="width: 45%;"></div>
+          </div>
+          <span class="queue-status-text">Movimento moderado</span>
+        </div>
+      </section>
+
+      <!-- Next Meal -->
+      <section class="meal-section">
+        <div class="meal-card">
+          <div class="meal-header">
+            <div>
+              <span class="meal-label">PRÓXIMA REFEIÇÃO</span>
+              <h3 class="meal-name">Almoço</h3>
+              <span class="meal-time">10:30 — 14:30</span>
+            </div>
+            <div class="meal-icon-wrapper">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+          </div>
+          <div class="meal-menu-preview">
+            <p><strong>Prato Principal:</strong> Frango Grelhado ao Molho Ervas</p>
+            <p><strong>Acompanhamento:</strong> Arroz, Feijão Preto e Farofa</p>
+            <p><strong>Opção Vegetariana:</strong> Omelete de Queijo com Ervas</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" onclick="switchTab('inicio')">
+        <i class="fa-solid fa-house"></i>
+        <span>Início</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('cardapio')">
+        <i class="fa-solid fa-utensils"></i>
+        <span>Cardápio</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('fila')">
+        <i class="fa-solid fa-chart-simple"></i>
+        <span>Fila</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('comunidade')">
+        <i class="fa-solid fa-users"></i>
+        <span>Comunidade</span>
+      </button>
+      <button class="nav-item" onclick="switchTab('perfil')">
+        <i class="fa-solid fa-user"></i>
+        <span>Perfil</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Modal for QR / NFC -->
+  <div id="modal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content">
+      <h3 id="modal-title">Aproxime na Catraca</h3>
+      <div id="modal-body"></div>
+      <button class="btn-close-modal" onclick="closeModalDirect()">Fechar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
