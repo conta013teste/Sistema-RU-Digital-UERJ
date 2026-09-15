@@ -9,10 +9,9 @@
 </head>
 <body>
   <div class="app-container">
-    <!-- Header -->
     <header class="app-header">
       <div class="user-greeting">
-        <h1>Olá, Jonas 👋</h1>
+        <h1 id="user-name-title">Olá, Jonas 👋</h1>
         <p>Seu RU na palma da mão.</p>
       </div>
       <div class="balance-card">
@@ -24,99 +23,147 @@
       </div>
     </header>
 
-    <!-- Main Content -->
     <main class="main-content">
-      <!-- Digital Card -->
-      <section class="card-section">
-        <div class="digital-card">
-          <div class="card-top">
-            <span class="card-title">CARTÃO RU DIGITAL</span>
-            <i class="fa-solid fa-wallet card-icon"></i>
-          </div>
-          <div class="card-user-info">
-            <h2 id="card-name">Jonas</h2>
-            <p id="card-matricula">Matrícula: 20241234567</p>
-            <span class="card-balance" id="card-balance-display">R$ 2,00</span>
-          </div>
-          <div class="card-actions">
-            <button class="btn-card-action" onclick="showNFC()"><i class="fa-solid fa-wifi"></i> NFC</button>
-            <button class="btn-card-action" onclick="showQRCode()"><i class="fa-solid fa-qrcode"></i> QR Code</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- Queue Status -->
-      <section class="queue-section">
-        <div class="queue-card">
-          <div class="queue-header">
-            <div class="queue-icon-wrapper">
-              <i class="fa-solid fa-users-line"></i>
+      <!-- ABA: INÍCIO -->
+      <div id="tab-inicio" class="tab-content active-tab">
+        <section class="card-section">
+          <div class="digital-card">
+            <div class="card-top">
+              <span class="card-title">CARTÃO RU DIGITAL</span>
+              <i class="fa-solid fa-wallet card-icon"></i>
             </div>
-            <div class="queue-text">
-              <span class="queue-label">FILA AGORA</span>
-              <div class="queue-count">
-                <span class="queue-number" id="queue-count">68</span>
-                <span class="queue-unit">pessoas</span>
+            <div class="card-user-info">
+              <h2>Jonas</h2>
+              <p>Matrícula: 20241234567</p>
+              <span class="card-balance" id="card-balance-display">R$ 2,00</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-card-action" onclick="showNFC()"><i class="fa-solid fa-wifi"></i> NFC</button>
+              <button class="btn-card-action" onclick="showQRCode()"><i class="fa-solid fa-qrcode"></i> QR Code</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="queue-section">
+          <div class="queue-card">
+            <div class="queue-header">
+              <div class="queue-icon-wrapper"><i class="fa-solid fa-users-line"></i></div>
+              <div class="queue-text">
+                <span class="queue-label">FILA AGORA</span>
+                <div class="queue-count"><span class="queue-number">68</span><span class="queue-unit">pessoas</span></div>
+                <span class="queue-time"><i class="fa-regular fa-clock"></i> Tempo médio: <strong>15 min</strong></span>
               </div>
-              <span class="queue-time"><i class="fa-regular fa-clock"></i> Tempo médio: <strong id="queue-time">15 min</strong></span>
+              <button class="btn-view-queue" onclick="switchTab('fila')">Ver Fila</button>
             </div>
-            <button class="btn-view-queue" onclick="alert('Câmera da fila indisponível no momento.')">Ver Fila</button>
+            <div class="queue-bar-container"><div class="queue-bar" style="width: 45%;"></div></div>
+            <span class="queue-status-text">Movimento moderado</span>
           </div>
-          <div class="queue-bar-container">
-            <div class="queue-bar" style="width: 45%;"></div>
-          </div>
-          <span class="queue-status-text">Movimento moderado</span>
-        </div>
-      </section>
+        </section>
 
-      <!-- Next Meal -->
-      <section class="meal-section">
-        <div class="meal-card">
-          <div class="meal-header">
-            <div>
-              <span class="meal-label">PRÓXIMA REFEIÇÃO</span>
-              <h3 class="meal-name">Almoço</h3>
-              <span class="meal-time">10:30 — 14:30</span>
+        <section class="meal-section">
+          <div class="meal-card">
+            <div class="meal-header">
+              <div>
+                <span class="meal-label">PRÓXIMA REFEIÇÃO</span>
+                <h3 class="meal-name">Almoço</h3>
+                <span class="meal-time">10:30 — 14:30</span>
+              </div>
+              <div class="meal-icon-wrapper"><i class="fa-solid fa-utensils"></i></div>
             </div>
-            <div class="meal-icon-wrapper">
-              <i class="fa-solid fa-utensils"></i>
+            <div class="meal-menu-preview">
+              <p><strong>Prato Principal:</strong> Frango Grelhado ao Molho Ervas</p>
+              <p><strong>Acompanhamento:</strong> Arroz, Feijão Preto e Farofa</p>
+              <p><strong>Opção Vegetariana:</strong> Omelete de Queijo com Ervas</p>
             </div>
           </div>
-          <div class="meal-menu-preview">
-            <p><strong>Prato Principal:</strong> Frango Grelhado ao Molho Ervas</p>
-            <p><strong>Acompanhamento:</strong> Arroz, Feijão Preto e Farofa</p>
-            <p><strong>Opção Vegetariana:</strong> Omelete de Queijo com Ervas</p>
+        </section>
+      </div>
+
+      <!-- ABA: CARDÁPIO -->
+      <div id="tab-cardapio" class="tab-content" style="display: none;">
+        <div class="info-card">
+          <h2>Cardápio do Dia — RU UERJ</h2>
+          <hr style="margin: 10px 0; border: 0; border-top: 1px solid #e2e8f0;">
+          <p><strong>Almoço (10:30 - 14:30):</strong></p>
+          <ul style="margin-left: 20px; margin-bottom: 15px; font-size: 14px; color: #4a5568;">
+            <li>Frango Grelhado / Salada de Alface e Tomate</li>
+            <li>Arroz Integral / Branco, Feijão Preto</li>
+            <li>Sobremesa: Laranja / Doce de Leite</li>
+          </ul>
+          <p><strong>Jantar (17:00 - 20:00):</strong></p>
+          <ul style="margin-left: 20px; font-size: 14px; color: #4a5568;">
+            <li>Carne Moída com Batata</li>
+            <li>Sopa de Legumes</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ABA: FILA -->
+      <div id="tab-fila" class="tab-content" style="display: none;">
+        <div class="info-card">
+          <h2>Monitoramento da Fila</h2>
+          <p style="margin-top: 8px; color: #718096; font-size: 14px;">Estimativa em tempo real baseada nos acessos da catraca.</p>
+          <div style="background: #edf2f7; padding: 20px; border-radius: 12px; text-align: center; margin-top: 15px;">
+            <span style="font-size: 36px; font-weight: 800; color: #dd6b20;">68</span>
+            <p style="font-weight: 600; color: #2d3748;">Pessoas na fila do RU Maracanã</p>
+            <p style="font-size: 12px; color: #a0aec0; margin-top: 5px;">Tempo aproximado de espera: 15 minutos</p>
           </div>
         </div>
-      </section>
+      </div>
+
+      <!-- ABA: COMUNIDADE -->
+      <div id="tab-comunidade" class="tab-content" style="display: none;">
+        <div class="info-card">
+          <h2>Mural da Comunidade UERJ</h2>
+          <p style="margin-top: 8px; color: #718096; font-size: 14px;">Avisos recentes e relatos dos estudantes:</p>
+          <div style="margin-top: 15px; border-bottom: 1px solid #edf2f7; padding-bottom: 10px;">
+            <strong>Estudante:</strong> <span style="font-size: 13px; color: #718096;">há 10 min</span>
+            <p style="font-size: 14px; color: #4a5568; margin-top: 4px;">Fila andou bem rápido agora no almoço!</p>
+          </div>
+          <div style="margin-top: 10px;">
+            <strong>Aviso RU:</strong> <span style="font-size: 13px; color: #718096;">há 1 hora</span>
+            <p style="font-size: 14px; color: #4a5568; margin-top: 4px;">Funcionamento normal para o jantar.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ABA: PERFIL -->
+      <div id="tab-perfil" class="tab-content" style="display: none;">
+        <div class="info-card">
+          <h2>Meu Perfil</h2>
+          <p style="margin-top: 10px; font-size: 14px;"><strong>Nome:</strong> Jonas</p>
+          <p style="font-size: 14px; margin-top: 5px;"><strong>Matrícula:</strong> 20241234567</p>
+          <p style="font-size: 14px; margin-top: 5px;"><strong>Vínculo:</strong> Aluno de Graduação (UERJ)</p>
+          <button onclick="rechargeBalance()" class="btn-recharge" style="width: 100%; margin-top: 15px;">Recarregar Saldo</button>
+        </div>
+      </div>
     </main>
 
-    <!-- Bottom Navigation -->
+    <!-- NAVEGAÇÃO INFERIOR -->
     <nav class="bottom-nav">
-      <button class="nav-item active" onclick="switchTab('inicio')">
+      <button class="nav-item active" onclick="switchTab('inicio', this)">
         <i class="fa-solid fa-house"></i>
         <span>Início</span>
       </button>
-      <button class="nav-item" onclick="switchTab('cardapio')">
+      <button class="nav-item" onclick="switchTab('cardapio', this)">
         <i class="fa-solid fa-utensils"></i>
         <span>Cardápio</span>
       </button>
-      <button class="nav-item" onclick="switchTab('fila')">
+      <button class="nav-item" onclick="switchTab('fila', this)">
         <i class="fa-solid fa-chart-simple"></i>
         <span>Fila</span>
       </button>
-      <button class="nav-item" onclick="switchTab('comunidade')">
+      <button class="nav-item" onclick="switchTab('comunidade', this)">
         <i class="fa-solid fa-users"></i>
         <span>Comunidade</span>
       </button>
-      <button class="nav-item" onclick="switchTab('perfil')">
+      <button class="nav-item" onclick="switchTab('perfil', this)">
         <i class="fa-solid fa-user"></i>
         <span>Perfil</span>
       </button>
     </nav>
   </div>
 
-  <!-- Modal for QR / NFC -->
   <div id="modal" class="modal-overlay" onclick="closeModal(event)">
     <div class="modal-content">
       <h3 id="modal-title">Aproxime na Catraca</h3>
